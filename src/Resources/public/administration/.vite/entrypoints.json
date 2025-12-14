@@ -1,0 +1,30 @@
+{
+  "base": "/bundles/runelaenentwofactorauth/administration/",
+  "entryPoints": {
+    "rune-laenen-two-factor-auth": {
+      "css": [],
+      "dynamic": [
+        "/bundles/runelaenentwofactorauth/administration/assets/index-CbJiwpz5.js",
+        "/bundles/runelaenentwofactorauth/administration/assets/index-Dm0WN4sJ.js",
+        "/bundles/runelaenentwofactorauth/administration/assets/index-DUCBVlN4.js",
+        "/bundles/runelaenentwofactorauth/administration/assets/index-CVYLtlZ3.js",
+        "/bundles/runelaenentwofactorauth/administration/assets/index-DzhQ6iXL.js",
+        "/bundles/runelaenentwofactorauth/administration/assets/index-P_cC-St9.js"
+      ],
+      "js": [
+        "/bundles/runelaenentwofactorauth/administration/assets/rune-laenen-two-factor-auth-Hybu9o4d.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}
