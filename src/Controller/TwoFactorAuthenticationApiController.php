@@ -40,7 +40,7 @@ class TwoFactorAuthenticationApiController extends AbstractController
         $secret = $this->totpService->createSecret();
         $qrUrl = $this->totpService->getQrCodeUrl(
             $company,
-            $request->get('holder', ''),
+            $request->query->getString('holder'),
             $secret
         );
 
@@ -57,14 +57,17 @@ class TwoFactorAuthenticationApiController extends AbstractController
     #[Route(path: '/validate-secret', name: 'api.action.tinect-2fa.validate-secret', methods: ['POST'])]
     public function validateSecret(Request $request): JsonResponse
     {
-        if (empty($request->get('secret')) || empty($request->get('code'))) {
+        $secret = $request->request->getString('secret');
+        $code = $request->request->getString('code');
+
+        if ($secret === '' || $code === '') {
             return new JsonResponse([
                 'status' => 'error',
                 'error' => 'Secret or code empty',
             ], 400);
         }
 
-        $verified = $this->totpService->verifyCode((string) $request->get('secret'), (string) $request->get('code'));
+        $verified = $this->totpService->verifyCode($secret, $code);
         if ($verified) {
             return new JsonResponse(['status' => 'OK']);
         }

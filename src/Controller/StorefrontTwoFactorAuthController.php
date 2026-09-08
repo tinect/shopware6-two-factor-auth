@@ -47,7 +47,7 @@ class StorefrontTwoFactorAuthController extends StorefrontController
         }
 
         if ($request->getMethod() === 'POST') {
-            $code = $request->get('otpCode');
+            $code = $request->request->getString('otpCode');
 
             if ($this->totpService->verifyCode(
                 $twoFactorSecret,

@@ -46,12 +46,12 @@ readonly class ApiOauthTokenSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($request->request->get('scope') === 'user-verified'
+        if ($request->request->getString('scope') === 'user-verified'
             || $event->getResponse()->getStatusCode() !== 200) {
             return;
         }
 
-        $username = $request->request->get('username');
+        $username = $request->request->getString('username');
 
         $user = $this->userRepository->search(
             (new Criteria())->addFilter(new EqualsFilter('username', $username)),
@@ -64,7 +64,7 @@ readonly class ApiOauthTokenSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $otp = $request->request->get('tinect_2fa_otp');
+        $otp = $request->request->getString('tinect_2fa_otp');
         if ($otp && $this->checkOtp($user->getCustomFields()['rl_2fa_secret'], $otp)) {
             return;
         }

@@ -103,7 +103,7 @@ class TwoFactorAuthenticationController extends StorefrontController
         }
 
         $customer = $salesChannelContext->getCustomer();
-        $password = $request->get('otpPassword');
+        $password = $request->request->getString('otpPassword');
         if (!$customer) {
             $this->addFlash('danger', $this->trans('tinect-2fa.account.error.no-customer'));
 
@@ -154,20 +154,23 @@ class TwoFactorAuthenticationController extends StorefrontController
             ], 400);
         }
 
-        if (empty($request->get('secret')) || empty($request->get('code'))) {
+        $secret = $request->request->getString('secret');
+        $code = $request->request->getString('code');
+
+        if ($secret === '' || $code === '') {
             return new JsonResponse([
                 'status' => 'error',
                 'error' => $this->trans('tinect-2fa.account.error.empty-input'),
             ], 400);
         }
 
-        $verified = $this->totpService->verifyCode((string) $request->get('secret'), (string) $request->get('code'));
+        $verified = $this->totpService->verifyCode($secret, $code);
         if ($verified) {
             $this->customerRepository->update([
                 [
                     'id' => $salesChannelContext->getCustomer()->getId(),
                     'customFields' => [
-                        'rl_2fa_secret' => (string) $request->get('secret'),
+                        'rl_2fa_secret' => $secret,
                     ],
                 ],
             ], $salesChannelContext->getContext());
