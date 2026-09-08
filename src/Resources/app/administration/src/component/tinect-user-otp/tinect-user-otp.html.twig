@@ -1,62 +1,62 @@
 {% block rl_user_otp_user_card %}
 <mt-card
-    :title="$tc('rl-2fa.settings.user-detail.title')"
+    :title="$tc('tinect-2fa.settings.user-detail.title')"
     :is-loading="isLoading || isLoading2Fa"
 >
     <div v-if="user && user.customFields && user.customFields.rl_2fa_secret">
         <mt-banner
             variant="positive"
-            :title="$tc('rl-2fa.settings.user-detail.enabled.title')"
+            :title="$tc('tinect-2fa.settings.user-detail.enabled.title')"
             style="margin-bottom: 0;"
             :showIcon="true"
             :closable="false"
         >
-            {{ $tc('rl-2fa.settings.user-detail.enabled.description') }}
+            {{ $tc('tinect-2fa.settings.user-detail.enabled.description') }}
         </mt-banner>
         <mt-button
             variant="critical"
             class="mt-1"
             @click="disable2FA"
         >
-            {{ $tc('rl-2fa.settings.user-detail.enabled.disable') }}
+            {{ $tc('tinect-2fa.settings.user-detail.enabled.disable') }}
         </mt-button>
     </div>
     <div v-else-if="!generatedSecretUrl">
         <mt-banner
             variant="attention"
-            :title="$tc('rl-2fa.settings.user-detail.not-enabled.title')"
+            :title="$tc('tinect-2fa.settings.user-detail.not-enabled.title')"
             style="margin-bottom: 0;"
             :showIcon="true"
             :closable="false"
         >
-            {{ $tc('rl-2fa.settings.user-detail.not-enabled.description') }}
+            {{ $tc('tinect-2fa.settings.user-detail.not-enabled.description') }}
         </mt-banner>
         <mt-button
             variant="primary"
             class="mt-1"
             @click="generateSecret"
         >
-            {{ $tc('rl-2fa.settings.user-detail.not-enabled.get-started') }}
+            {{ $tc('tinect-2fa.settings.user-detail.not-enabled.get-started') }}
         </mt-button>
     </div>
     <div v-else-if="generatedSecretUrl">
         <sw-container columns="1fr 1fr">
-            <div class="rl-2fa-qr-code">
+            <div class="tinect-2fa-qr-code">
                 <img :src="generatedSecretUrl"/>
-                <span class="rl-2fa-qr-code--secret">{{ generatedSecret }}</span>
+                <span class="tinect-2fa-qr-code--secret">{{ generatedSecret }}</span>
             </div>
             <div>
                 <b>
-                    {{ $tc('rl-2fa.settings.user-detail.generating.scan-code') }}
+                    {{ $tc('tinect-2fa.settings.user-detail.generating.scan-code') }}
                 </b>
                 <br/>
                 <br/>
-                {{ $tc('rl-2fa.settings.user-detail.generating.description') }}
+                {{ $tc('tinect-2fa.settings.user-detail.generating.description') }}
                 <br/>
                 <br/>
                 <mt-banner
                     variant="critical"
-                    :title="$tc('rl-2fa.settings.user-detail.generating.error-title')"
+                    :title="$tc('tinect-2fa.settings.user-detail.generating.error-title')"
                     :showIcon="true"
                     v-if="oneTimePasswordError.length > 0"
                 >
@@ -72,7 +72,7 @@
                     variant="primary"
                     @click="validateAndSaveOneTimePassword"
                 >
-                    {{ $tc('rl-2fa.settings.user-detail.generating.validate-save') }}
+                    {{ $tc('tinect-2fa.settings.user-detail.generating.validate-save') }}
                 </mt-button>
             </div>
         </sw-container>

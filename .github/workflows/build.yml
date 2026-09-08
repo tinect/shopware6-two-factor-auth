@@ -9,7 +9,7 @@ jobs:
   build:
     uses: FriendsOfShopware/actions/.github/workflows/github.yml@main
     with:
-      extensionName: RuneLaenenTwoFactorAuth
+      extensionName: TinectTwoFactorAuth
       shopwareVersion: 6.7.0
     secrets:
       ghToken: ${{ secrets.GITHUB_TOKEN }}

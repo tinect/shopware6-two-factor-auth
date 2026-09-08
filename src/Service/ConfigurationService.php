@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Service;
+namespace Tinect\TwoFactorAuth\Service;
 
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 
 readonly class ConfigurationService
 {
-    public const CONFIGURATION_KEY = 'RuneLaenenTwoFactorAuth.config.';
+    public const CONFIGURATION_KEY = 'TinectTwoFactorAuth.config.';
 
     public function __construct(private SystemConfigService $systemConfig)
     {

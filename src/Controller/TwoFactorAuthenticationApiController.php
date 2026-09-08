@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Controller;
+namespace Tinect\TwoFactorAuth\Controller;
 
-use RuneLaenen\TwoFactorAuth\Service\ConfigurationService;
-use RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
+use Tinect\TwoFactorAuth\Service\ConfigurationService;
+use Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
 use Shopware\Core\PlatformRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -18,11 +18,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 #[AutoconfigureTag(name: 'controller.service_arguments')]
-#[Route(path: '/api/_action/rl-2fa', defaults: ['_routeScope' => ['api']])]
+#[Route(path: '/api/_action/tinect-2fa', defaults: ['_routeScope' => ['api']])]
 class TwoFactorAuthenticationApiController extends AbstractController
 {
     public function __construct(
-        #[Autowire(service: 'RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordService')]
+        #[Autowire(service: 'Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordService')]
         private readonly TimebasedOneTimePasswordServiceInterface $totpService,
         #[Autowire(service: 'Shopware\Storefront\Framework\Routing\Router')]
         private readonly RouterInterface $router,
@@ -30,7 +30,7 @@ class TwoFactorAuthenticationApiController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/generate-secret', name: 'api.action.rl-2fa.generate-secret', methods: ['GET'])]
+    #[Route(path: '/generate-secret', name: 'api.action.tinect-2fa.generate-secret', methods: ['GET'])]
     public function generateSecret(Request $request): JsonResponse
     {
         $company = $this->configurationService->getAdministrationCompany(
@@ -47,14 +47,14 @@ class TwoFactorAuthenticationApiController extends AbstractController
         return new JsonResponse([
             'secret' => $secret,
             'qrUrl' => $this->router->generate(
-                'rl-2fa.qr-code.secret',
+                'tinect-2fa.qr-code.secret',
                 ['qrUrl' => $qrUrl],
                 UrlGeneratorInterface::ABSOLUTE_URL
             ),
         ]);
     }
 
-    #[Route(path: '/validate-secret', name: 'api.action.rl-2fa.validate-secret', methods: ['POST'])]
+    #[Route(path: '/validate-secret', name: 'api.action.tinect-2fa.validate-secret', methods: ['POST'])]
     public function validateSecret(Request $request): JsonResponse
     {
         if (empty($request->get('secret')) || empty($request->get('code'))) {

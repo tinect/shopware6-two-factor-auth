@@ -5,7 +5,7 @@ export default {
 
     methods: {
         onSave() {
-            this.$emit('rl-2fa-save');
+            this.$emit('tinect-2fa-save');
         },
     },
 };

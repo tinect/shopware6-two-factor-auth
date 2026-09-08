@@ -1,4 +1,4 @@
-export default class Rl2faVerificationPlugin extends window.PluginBaseClass {
+export default class Tinect2faVerificationPlugin extends window.PluginBaseClass {
     static options = {
         /** Selector for the submit button of the verification step */
         buttonSelector: '.account-profile-2fa-setup-verify',
@@ -10,11 +10,11 @@ export default class Rl2faVerificationPlugin extends window.PluginBaseClass {
         secretInputSelector: '[name=otpSecret]',
 
         /** Selector for the error message wrapper of the verification step */
-        errorMessageWrapperSelector: '.rl2fa-setup-verification-message',
+        errorMessageWrapperSelector: '.tinect2fa-setup-verification-message',
 
         /** Selector for the error message content of the verification step */
         errorMessageSelector:
-            '.rl2fa-setup-verification-message .alert-content-container',
+            '.tinect2fa-setup-verification-message .alert-content-container',
 
         /** Class to toggle visibility (display: none) */
         invisibleClass: 'd-none',

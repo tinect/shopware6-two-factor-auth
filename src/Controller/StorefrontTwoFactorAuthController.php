@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Controller;
+namespace Tinect\TwoFactorAuth\Controller;
 
-use RuneLaenen\TwoFactorAuth\Event\StorefrontTwoFactorAuthEvent;
-use RuneLaenen\TwoFactorAuth\Event\StorefrontTwoFactorCancelEvent;
-use RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
+use Tinect\TwoFactorAuth\Event\StorefrontTwoFactorAuthEvent;
+use Tinect\TwoFactorAuth\Event\StorefrontTwoFactorCancelEvent;
+use Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
 use Shopware\Core\Checkout\Customer\SalesChannel\AbstractLogoutRoute;
 use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class StorefrontTwoFactorAuthController extends StorefrontController
 {
     public function __construct(
-        #[Autowire(service: 'RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordService')]
+        #[Autowire(service: 'Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordService')]
         private readonly TimebasedOneTimePasswordServiceInterface $totpService,
         #[Autowire(service: 'event_dispatcher')]
         private readonly EventDispatcherInterface $dispatcher,
@@ -33,7 +33,7 @@ class StorefrontTwoFactorAuthController extends StorefrontController
     ) {
     }
 
-    #[Route(path: '/rl-2fa/verification', name: 'frontend.rl2fa.verification', methods: ['GET', 'POST'])]
+    #[Route(path: '/tinect-2fa/verification', name: 'frontend.tinect2fa.verification', methods: ['GET', 'POST'])]
     public function verification(Request $request, SalesChannelContext $context): Response
     {
         $twoFactorSecret = $context->getCustomer()?->getCustomFields()['rl_2fa_secret'] ?? null;
@@ -62,7 +62,7 @@ class StorefrontTwoFactorAuthController extends StorefrontController
                 return $this->createActionResponse($request);
             }
 
-            $this->addFlash('danger', $this->trans('rl-2fa.account.error.incorrect-code'));
+            $this->addFlash('danger', $this->trans('tinect-2fa.account.error.incorrect-code'));
         }
 
         $redirectQuery = $request->query->all()['redirect'] ?? [];
@@ -76,12 +76,12 @@ class StorefrontTwoFactorAuthController extends StorefrontController
             $request->query->add($transformedQuery);
         }
 
-        return $this->render('@RuneLaenenTwoFactorAuth/storefront/page/2fa/verification.html.twig', [
+        return $this->render('@TinectTwoFactorAuth/storefront/page/2fa/verification.html.twig', [
             'redirect' => $request->query->all(),
         ]);
     }
 
-    #[Route(path: '/rl-2fa/verification/cancel', name: 'frontend.rl2fa.verification.cancel', methods: ['GET'])]
+    #[Route(path: '/tinect-2fa/verification/cancel', name: 'frontend.tinect2fa.verification.cancel', methods: ['GET'])]
     public function cancelVerification(Request $request, SalesChannelContext $context, RequestDataBag $dataBag): RedirectResponse
     {
         if ($context->getCustomer() !== null) {

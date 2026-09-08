@@ -4,7 +4,7 @@
 <sw-description-list>
     {% block sw_customer_base_metadata_2fa_label %}
     <dt class="sw-customer-base-info__label">
-        {{ $tc('rl-2fa.settings.user-detail.title') }}
+        {{ $tc('tinect-2fa.settings.user-detail.title') }}
     </dt>
     {% endblock %}
 
@@ -23,7 +23,7 @@
             if="twoFactorAuthenticationActive"
             @click="disable2FA"
         >
-            {{ $tc('rl-2fa.settings.user-detail.enabled.disable') }}
+            {{ $tc('tinect-2fa.settings.user-detail.enabled.disable') }}
         </mt-button>
     </dd>
     {% endblock %}

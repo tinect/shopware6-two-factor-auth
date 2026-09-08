@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Extension;
+namespace Tinect\TwoFactorAuth\Extension;
 
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -22,7 +22,7 @@ class FileExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('rl2fa_main_js', $this->pathToBundleMainJs(...)),
+            new TwigFilter('tinect2fa_main_js', $this->pathToBundleMainJs(...)),
         ];
     }
 

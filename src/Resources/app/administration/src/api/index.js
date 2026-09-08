@@ -1,9 +1,9 @@
-import Rl2faService from './rl-2fa';
+import Tinect2faService from './tinect-2fa';
 
 const { Application } = Shopware;
 
-Application.addServiceProvider('rl2faService', (container) => {
+Application.addServiceProvider('tinect2faService', (container) => {
     const initContainer = Application.getContainer('init');
 
-    return new Rl2faService(initContainer.httpClient, container.loginService);
+    return new Tinect2faService(initContainer.httpClient, container.loginService);
 });

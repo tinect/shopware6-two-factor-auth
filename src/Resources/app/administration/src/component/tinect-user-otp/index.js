@@ -1,14 +1,14 @@
-import template from './rl-user-otp.html.twig';
-import './rl-user-otp.scss';
+import template from './tinect-user-otp.html.twig';
+import './tinect-user-otp.scss';
 
 /**
  * @component-example
- * <rl-user-otp :user="user" :isLoading="isLoading" :onSave="onSave"></rl-user-otp>
+ * <tinect-user-otp :user="user" :isLoading="isLoading" :onSave="onSave"></tinect-user-otp>
  */
 export default {
     template,
 
-    inject: ['rl2faService'],
+    inject: ['tinect2faService'],
 
     props: {
         user: {
@@ -45,7 +45,7 @@ export default {
         generateSecret() {
             this.isLoading2Fa = true;
 
-            this.rl2faService.getSecret(this.user.username).then((response) => {
+            this.tinect2faService.getSecret(this.user.username).then((response) => {
                 this.isLoading2Fa = false;
                 this.generatedSecret = response.secret;
                 this.generatedSecretUrl = response.qrUrl;
@@ -55,7 +55,7 @@ export default {
         validateAndSaveOneTimePassword() {
             this.isLoading2Fa = true;
 
-            this.rl2faService
+            this.tinect2faService
                 .validateSecret(this.generatedSecret, this.oneTimePassword)
                 .then((response) => {
                     this.isLoading2Fa = false;

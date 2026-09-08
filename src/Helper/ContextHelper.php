@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Helper;
+namespace Tinect\TwoFactorAuth\Helper;
 
 use Shopware\Core\Framework\Api\Context\ContextSource;
 use Shopware\Core\Framework\Api\Context\SystemSource;

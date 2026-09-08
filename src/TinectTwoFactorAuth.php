@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth;
+namespace Tinect\TwoFactorAuth;
 
 use Shopware\Core\Framework\Plugin;
 
-class RuneLaenenTwoFactorAuth extends Plugin
+class TinectTwoFactorAuth extends Plugin
 {
     public function executeComposerCommands(): bool
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Service;
+namespace Tinect\TwoFactorAuth\Service;
 
 interface TimebasedOneTimePasswordServiceInterface
 {

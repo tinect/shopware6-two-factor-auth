@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Controller;
+namespace Tinect\TwoFactorAuth\Controller;
 
-use RuneLaenen\TwoFactorAuth\Service\ConfigurationService;
-use RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordService;
-use RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
+use Tinect\TwoFactorAuth\Service\ConfigurationService;
+use Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordService;
+use Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
 use Shopware\Core\Checkout\Customer\CustomerException;
 use Shopware\Core\Checkout\Customer\SalesChannel\AccountService;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
@@ -39,8 +39,8 @@ class TwoFactorAuthenticationController extends StorefrontController
     }
 
     #[Route(
-        path: '/rl-2fa/profile/setup',
-        name: 'widgets.rl-2fa.profile.setup',
+        path: '/tinect-2fa/profile/setup',
+        name: 'widgets.tinect-2fa.profile.setup',
         defaults: ['XmlHttpRequest' => true],
         methods: ['GET'],
     )]
@@ -64,7 +64,7 @@ class TwoFactorAuthenticationController extends StorefrontController
         return $this->renderStorefront('@Storefront/storefront/page/account/profile/2fa/setup.html.twig', [
             'secret' => $secret,
             'qrUrl' => $this->router->generate(
-                'rl-2fa.qr-code.secret',
+                'tinect-2fa.qr-code.secret',
                 ['qrUrl' => $qrUrl],
                 UrlGeneratorInterface::ABSOLUTE_URL
             ),
@@ -72,8 +72,8 @@ class TwoFactorAuthenticationController extends StorefrontController
     }
 
     #[Route(
-        path: '/rl-2fa/profile/disable',
-        name: 'widgets.rl-2fa.profile.disable',
+        path: '/tinect-2fa/profile/disable',
+        name: 'widgets.tinect-2fa.profile.disable',
         defaults: ['XmlHttpRequest' => true],
         methods: ['GET'],
     )]
@@ -89,15 +89,15 @@ class TwoFactorAuthenticationController extends StorefrontController
     }
 
     #[Route(
-        path: '/rl-2fa/profile/disable',
-        name: 'widgets.rl-2fa.profile.disable.post',
+        path: '/tinect-2fa/profile/disable',
+        name: 'widgets.tinect-2fa.profile.disable.post',
         defaults: ['XmlHttpRequest' => true],
         methods: ['POST'],
     )]
     public function profileDisablePost(Request $request, SalesChannelContext $salesChannelContext): Response
     {
         if (!$this->configurationService->isStorefrontEnabled($salesChannelContext->getSalesChannelId())) {
-            $this->addFlash('danger', $this->trans('rl-2fa.account.error.not-enabled'));
+            $this->addFlash('danger', $this->trans('tinect-2fa.account.error.not-enabled'));
 
             return $this->redirectToRoute('frontend.account.profile.page');
         }
@@ -105,7 +105,7 @@ class TwoFactorAuthenticationController extends StorefrontController
         $customer = $salesChannelContext->getCustomer();
         $password = $request->get('otpPassword');
         if (!$customer) {
-            $this->addFlash('danger', $this->trans('rl-2fa.account.error.no-customer'));
+            $this->addFlash('danger', $this->trans('tinect-2fa.account.error.no-customer'));
 
             return $this->redirectToRoute('frontend.account.profile.page');
         }
@@ -113,7 +113,7 @@ class TwoFactorAuthenticationController extends StorefrontController
         try {
             $this->accountService->getCustomerByLogin($customer->getEmail(), $password, $salesChannelContext);
         } catch (CustomerException) {
-            $this->addFlash('danger', $this->trans('rl-2fa.account.error.incorrect-password'));
+            $this->addFlash('danger', $this->trans('tinect-2fa.account.error.incorrect-password'));
 
             return $this->redirectToRoute('frontend.account.profile.page');
         }
@@ -127,14 +127,14 @@ class TwoFactorAuthenticationController extends StorefrontController
             ],
         ], $salesChannelContext->getContext());
 
-        $this->addFlash('info', $this->trans('rl-2fa.account.disabled-2fa'));
+        $this->addFlash('info', $this->trans('tinect-2fa.account.disabled-2fa'));
 
         return $this->redirectToRoute('frontend.account.profile.page');
     }
 
     #[Route(
-        path: '/rl-2fa/profile/validate',
-        name: 'widgets.rl-2fa.profile.validate',
+        path: '/tinect-2fa/profile/validate',
+        name: 'widgets.tinect-2fa.profile.validate',
         defaults: ['XmlHttpRequest' => true],
         methods: ['POST'],
     )]
@@ -143,21 +143,21 @@ class TwoFactorAuthenticationController extends StorefrontController
         if (!$this->configurationService->isStorefrontEnabled($salesChannelContext->getSalesChannel()->getId())) {
             return new JsonResponse([
                 'status' => 'error',
-                'error' => $this->trans('rl-2fa.account.error.not-enabled'),
+                'error' => $this->trans('tinect-2fa.account.error.not-enabled'),
             ], 400);
         }
 
         if (!$salesChannelContext->getCustomer()) {
             return new JsonResponse([
                 'status' => 'error',
-                'error' => $this->trans('rl-2fa.account.error.no-customer'),
+                'error' => $this->trans('tinect-2fa.account.error.no-customer'),
             ], 400);
         }
 
         if (empty($request->get('secret')) || empty($request->get('code'))) {
             return new JsonResponse([
                 'status' => 'error',
-                'error' => $this->trans('rl-2fa.account.error.empty-input'),
+                'error' => $this->trans('tinect-2fa.account.error.empty-input'),
             ], 400);
         }
 
@@ -177,7 +177,7 @@ class TwoFactorAuthenticationController extends StorefrontController
 
         return new JsonResponse([
             'status' => 'error',
-            'error' => $this->trans('rl-2fa.account.error.incorrect-code'),
+            'error' => $this->trans('tinect-2fa.account.error.incorrect-code'),
         ]);
     }
 }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Subscriber;
+namespace Tinect\TwoFactorAuth\Subscriber;
 
 use League\OAuth2\Server\Exception\OAuthServerException;
-use RuneLaenen\TwoFactorAuth\Helper\ContextHelper;
-use RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordService;
-use RuneLaenen\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
+use Tinect\TwoFactorAuth\Helper\ContextHelper;
+use Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordService;
+use Tinect\TwoFactorAuth\Service\TimebasedOneTimePasswordServiceInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
@@ -64,7 +64,7 @@ readonly class ApiOauthTokenSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $otp = $request->request->get('rl_2fa_otp');
+        $otp = $request->request->get('tinect_2fa_otp');
         if ($otp && $this->checkOtp($user->getCustomFields()['rl_2fa_secret'], $otp)) {
             return;
         }

@@ -1,7 +1,7 @@
 const { ApiService } = Shopware.Classes;
 
-export default class Rl2fa extends ApiService {
-    constructor(httpClient, loginService, apiEndpoint = '_action/rl-2fa') {
+export default class Tinect2fa extends ApiService {
+    constructor(httpClient, loginService, apiEndpoint = '_action/tinect-2fa') {
         super(httpClient, loginService, apiEndpoint);
     }
 

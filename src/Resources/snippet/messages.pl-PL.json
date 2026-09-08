@@ -1,5 +1,5 @@
 {
-    "rl-2fa": {
+    "tinect-2fa": {
         "login": {
             "title": "Uwierzytelnianie dwuskładnikowe",
             "description": "Zweryfikuj swoją tożsamość za pomocą aplikacji 2FA.",

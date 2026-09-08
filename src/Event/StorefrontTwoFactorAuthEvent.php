@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Event;
+namespace Tinect\TwoFactorAuth\Event;
 
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 

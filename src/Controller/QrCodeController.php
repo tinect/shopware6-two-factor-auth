@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Controller;
+namespace Tinect\TwoFactorAuth\Controller;
 
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
@@ -15,8 +15,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class QrCodeController
 {
     #[Route(
-        path: '/%shopware_administration.path_name%/rl-2fa/qr-code/secret',
-        name: 'rl-2fa.qr-code.secret',
+        path: '/%shopware_administration.path_name%/tinect-2fa/qr-code/secret',
+        name: 'tinect-2fa.qr-code.secret',
         defaults: ['auth_required' => false, '_routeScope' => ['administration']],
         methods: ['GET'],
     )]

@@ -1,5 +1,5 @@
 {
-    "rl-2fa": {
+    "tinect-2fa": {
         "login": {
             "title": "Zwei-Faktor-Authentifizierung",
             "description": "Bitte bestätigen Sie die Identität mit Ihrer 2FA-App.",

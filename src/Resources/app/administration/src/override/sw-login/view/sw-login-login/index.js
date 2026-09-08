@@ -42,7 +42,7 @@ export default {
                         scopes: 'write',
                         username: user,
                         password: pass,
-                        rl_2fa_otp: otp,
+                        tinect_2fa_otp: otp,
                     },
                     {
                         baseURL: Context.api.apiPath,

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace RuneLaenen\TwoFactorAuth\Subscriber;
+namespace Tinect\TwoFactorAuth\Subscriber;
 
-use RuneLaenen\TwoFactorAuth\Event\StorefrontTwoFactorAuthEvent;
-use RuneLaenen\TwoFactorAuth\Event\StorefrontTwoFactorCancelEvent;
+use Tinect\TwoFactorAuth\Event\StorefrontTwoFactorAuthEvent;
+use Tinect\TwoFactorAuth\Event\StorefrontTwoFactorCancelEvent;
 use Shopware\Core\Checkout\Customer\Event\CustomerLoginEvent;
 use Shopware\Core\SalesChannelRequest;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 #[AutoconfigureTag(name: 'kernel.event_subscriber')]
 readonly class CustomerLoginSubscriber implements EventSubscriberInterface
 {
-    public const SESSION_NAME = 'RL_2FA_NEED_VERIFICATION';
+    public const SESSION_NAME = 'TINECT_2FA_NEED_VERIFICATION';
 
     public function __construct(
         private RequestStack $requestStack,
@@ -71,7 +71,7 @@ readonly class CustomerLoginSubscriber implements EventSubscriberInterface
             $parameters['redirect'] = $queries->all();
         }
 
-        $url = $this->router->generate('frontend.rl2fa.verification', $parameters);
+        $url = $this->router->generate('frontend.tinect2fa.verification', $parameters);
 
         $response = new RedirectResponse($url);
 
@@ -96,6 +96,6 @@ readonly class CustomerLoginSubscriber implements EventSubscriberInterface
     {
         $route = (string) $event->getRequest()->attributes->get('_route');
 
-        return \in_array($route, ['frontend.rl2fa.verification', 'frontend.rl2fa.verification.cancel'], true);
+        return \in_array($route, ['frontend.tinect2fa.verification', 'frontend.tinect2fa.verification.cancel'], true);
     }
 }

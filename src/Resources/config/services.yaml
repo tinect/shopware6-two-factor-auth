@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    RuneLaenen\TwoFactorAuth\:
+    Tinect\TwoFactorAuth\:
         resource: ../../

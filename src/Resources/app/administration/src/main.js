@@ -6,8 +6,8 @@ import plPL from './snippet/pl-PL.json';
 
 import './api/index';
 Shopware.Component.register(
-    'rl-user-otp',
-    () => import('./component/rl-user-otp')
+    'tinect-user-otp',
+    () => import('./component/tinect-user-otp')
 );
 Shopware.Component.override(
     'sw-login-login',
