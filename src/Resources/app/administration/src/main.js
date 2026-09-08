@@ -33,9 +33,7 @@ if (
     Shopware.Component.override(
         'sw-users-permissions-user-detail',
         () =>
-            import(
-                './override/sw-users-permissions/page/sw-users-permissions-user-detail'
-            )
+            import('./override/sw-users-permissions/page/sw-users-permissions-user-detail')
     );
 }
 if (Shopware.Component.getComponentRegistry().has('sw-customer-base-info')) {
