@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/tinecttwofactorauth/administration/",
+  "entryPoints": {
+    "tinect-two-factor-auth": {
+      "css": [
+        "/bundles/tinecttwofactorauth/administration/css/tinect-two-factor-auth-Q4VPXAMK.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/tinecttwofactorauth/administration/js/tinect-two-factor-auth-U75V345X.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.0.4",
+    7,
+    0,
+    4
+  ],
+  "viteServer": null
+}

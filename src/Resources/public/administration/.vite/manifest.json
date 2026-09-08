@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "js/tinect-two-factor-auth-U75V345X.js",
+    "name": "tinect-two-factor-auth",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "css/tinect-two-factor-auth-Q4VPXAMK.css"
+    ]
+  }
+}
