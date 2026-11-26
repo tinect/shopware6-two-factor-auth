@@ -55,7 +55,8 @@ export default {
             this.tinect2faService
                 .getCustomerStatus(this.customer.id)
                 .then((response) => {
-                    this.twoFactorAuthenticationMethod = response.method ?? null;
+                    this.twoFactorAuthenticationMethod =
+                        response.method ?? null;
                     this.twoFactorAuthenticationForced =
                         response.forced === true;
                 })

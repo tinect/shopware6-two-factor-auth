@@ -35,7 +35,9 @@ export default {
                 return 0;
             }
 
-            return this.summary.totp + this.summary.email + this.summary.enforced;
+            return (
+                this.summary.totp + this.summary.email + this.summary.enforced
+            );
         },
 
         tiles() {
@@ -72,9 +74,7 @@ export default {
                     key: 'enforced',
                     value: this.formatNumber(this.summary.enforced),
                     label: this.$t('tinect-2fa.dashboard.summary.enforced'),
-                    hint: this.$t(
-                        'tinect-2fa.dashboard.summary.enforcedHint'
-                    ),
+                    hint: this.$t('tinect-2fa.dashboard.summary.enforcedHint'),
                 },
                 {
                     key: 'users',
