@@ -45,7 +45,9 @@ export default {
             return [
                 {
                     property: 'customer',
-                    label: this.$t('tinect-2fa.dashboard.recent.columnCustomer'),
+                    label: this.$t(
+                        'tinect-2fa.dashboard.recent.columnCustomer'
+                    ),
                     primary: true,
                 },
                 {

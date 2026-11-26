@@ -149,6 +149,11 @@ readonly class CustomerLoginSubscriber implements EventSubscriberInterface
         $this->emailCodeService->clear($request->getSession());
     }
 
+    public static function isLocalPath(string $url): bool
+    {
+        return str_starts_with($url, '/') && !str_starts_with($url, '//') && !str_contains($url, '\\');
+    }
+
     private static function isNavigationRequest(Request $request): bool
     {
         $fetchDestination = $request->headers->get('Sec-Fetch-Dest');
@@ -158,10 +163,5 @@ readonly class CustomerLoginSubscriber implements EventSubscriberInterface
 
         // Browsers without Fetch Metadata: page navigations ask for HTML, scripts and the like don't.
         return str_contains((string) $request->headers->get('Accept'), 'text/html');
-    }
-
-    public static function isLocalPath(string $url): bool
-    {
-        return str_starts_with($url, '/') && !str_starts_with($url, '//') && !str_contains($url, '\\');
     }
 }
